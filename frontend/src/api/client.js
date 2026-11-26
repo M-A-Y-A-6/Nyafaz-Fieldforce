@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+// When deployed to Vercel (or proxied via Vite dev server), API calls use relative '/api'.
+// In standalone local dev, VITE_API_URL or VITE_API_BASE_URL can override this (e.g. http://localhost:8000/api).
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
+  baseURL: import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || '/api',
   headers: {
     'Content-Type': 'application/json'
   }

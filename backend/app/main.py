@@ -7,9 +7,20 @@ app = FastAPI(
     title="Nyafaz FieldForce API",
     description="FastAPI Backend for Nyafaz FieldForce with Supabase & JWT Authentication",
     version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc"
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json"
 )
+
+@app.get("/docs", include_in_schema=False)
+async def redirect_docs():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/docs")
+
+@app.get("/redoc", include_in_schema=False)
+async def redirect_redoc():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/redoc")
 
 # Configure CORS
 origins = [
